@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 #import <Quartz/Quartz.h>
+#include <SystemConfiguration/SystemConfiguration.h>
 
 @interface EtherTeXAppDelegate : NSObject <NSApplicationDelegate> {
     NSWindow *window;

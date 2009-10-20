@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* EtherTeXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */; };
+		766F19A6108E2BF600DA78E6 /* AlertCautionIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 766F19A5108E2BF600DA78E6 /* AlertCautionIcon.icns */; };
+		766F1A46108E60C900DA78E6 /* DisconnectedIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 766F1A45108E60C900DA78E6 /* DisconnectedIcon.icns */; };
 		76AA5ADD108D95660086B01D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76AA5A34108D95650086B01D /* WebKit.framework */; };
 		76AA5B60108DB5810086B01D /* appl.icns in Resources */ = {isa = PBXBuildFile; fileRef = 76AA5B5F108DB5810086B01D /* appl.icns */; };
 		76EE507D108CCAB0004FF030 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76EE5024108CCAB0004FF030 /* Quartz.framework */; };
-		76EE50B0108CCBD6004FF030 /* backgrad.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76EE50AE108CCBD6004FF030 /* backgrad.gif */; };
 		76EE50B1108CCBD6004FF030 /* Test.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 76EE50AF108CCBD6004FF030 /* Test.pdf */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -30,10 +31,11 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		766F19A5108E2BF600DA78E6 /* AlertCautionIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AlertCautionIcon.icns; sourceTree = "<group>"; };
+		766F1A45108E60C900DA78E6 /* DisconnectedIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DisconnectedIcon.icns; sourceTree = "<group>"; };
 		76AA5A34108D95650086B01D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		76AA5B5F108DB5810086B01D /* appl.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = appl.icns; sourceTree = "<group>"; };
 		76EE5024108CCAB0004FF030 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
-		76EE50AE108CCBD6004FF030 /* backgrad.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = backgrad.gif; sourceTree = "<group>"; };
 		76EE50AF108CCBD6004FF030 /* Test.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Test.pdf; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* EtherTeX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "EtherTeX-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* EtherTeX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EtherTeX.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,8 +116,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				766F1A45108E60C900DA78E6 /* DisconnectedIcon.icns */,
+				766F19A5108E2BF600DA78E6 /* AlertCautionIcon.icns */,
 				76AA5B5F108DB5810086B01D /* appl.icns */,
-				76EE50AE108CCBD6004FF030 /* backgrad.gif */,
 				76EE50AF108CCBD6004FF030 /* Test.pdf */,
 				8D1107310486CEB800E47090 /* EtherTeX-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -178,9 +181,10 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
-				76EE50B0108CCBD6004FF030 /* backgrad.gif in Resources */,
 				76EE50B1108CCBD6004FF030 /* Test.pdf in Resources */,
 				76AA5B60108DB5810086B01D /* appl.icns in Resources */,
+				766F19A6108E2BF600DA78E6 /* AlertCautionIcon.icns in Resources */,
+				766F1A46108E60C900DA78E6 /* DisconnectedIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

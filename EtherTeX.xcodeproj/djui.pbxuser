@@ -9,17 +9,17 @@
 	};
 	256AC3D80F4B6AC300CF3369 /* EtherTeXAppDelegate.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {959, 412}}";
-			sepNavSelRange = "{502, 0}";
-			sepNavVisRange = "{0, 507}";
+			sepNavIntBoundsRect = "{{0, 0}, {959, 398}}";
+			sepNavSelRange = "{265, 0}";
+			sepNavVisRange = "{0, 560}";
 			sepNavWindowFrame = "{{67, 0}, {733, 778}}";
 		};
 	};
 	256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {840, 1316}}";
-			sepNavSelRange = "{1188, 0}";
-			sepNavVisRange = "{1035, 454}";
+			sepNavIntBoundsRect = "{{0, 0}, {840, 3038}}";
+			sepNavSelRange = "{3331, 0}";
+			sepNavVisRange = "{2621, 446}";
 		};
 	};
 	256AC3F00F4B6AF500CF3369 /* EtherTeX_Prefix.pch */ = {
@@ -37,9 +37,6 @@
 			8D1107260486CEB800E47090 /* EtherTeX */,
 		);
 		breakpoints = (
-			76AA5BA0108DBEBE0086B01D /* EtherTeXAppDelegate.m:72 */,
-			76AA5BA2108DBEC00086B01D /* EtherTeXAppDelegate.m:80 */,
-			76AA5BA4108DBEC10086B01D /* EtherTeXAppDelegate.m:86 */,
 		);
 		codeSenseManager = 7652ADED108CCA4D0098CAC6 /* Code sense */;
 		executables = (
@@ -92,16 +89,16 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 277728024;
-			PBXWorkspaceStateSaveDate = 277728024;
+			PBXPerProjectTemplateStateSaveDate = 277736719;
+			PBXWorkspaceStateSaveDate = 277736719;
 		};
 		perUserProjectItems = {
+			766F1A35108E5E1300DA78E6 /* PBXTextBookmark */ = 766F1A35108E5E1300DA78E6 /* PBXTextBookmark */;
+			766F1A49108E60E900DA78E6 /* PBXBookmark */ = 766F1A49108E60E900DA78E6 /* PBXBookmark */;
+			766F1A4A108E60E900DA78E6 /* PBXTextBookmark */ = 766F1A4A108E60E900DA78E6 /* PBXTextBookmark */;
+			766F1A78108E6F8700DA78E6 /* PBXTextBookmark */ = 766F1A78108E6F8700DA78E6 /* PBXTextBookmark */;
 			76A149E6108DCB8D00B47971 /* PBXTextBookmark */ = 76A149E6108DCB8D00B47971 /* PBXTextBookmark */;
-			76A14A0E108DCFEB00B47971 /* PBXTextBookmark */ = 76A14A0E108DCFEB00B47971 /* PBXTextBookmark */;
-			76A14A0F108DCFEB00B47971 /* PBXTextBookmark */ = 76A14A0F108DCFEB00B47971 /* PBXTextBookmark */;
-			76A14A12108DD02B00B47971 /* PBXTextBookmark */ = 76A14A12108DD02B00B47971 /* PBXTextBookmark */;
 			76AA5B0B108DA1CE0086B01D /* PBXTextBookmark */ = 76AA5B0B108DA1CE0086B01D /* PBXTextBookmark */;
-			76AA5B67108DB5F10086B01D /* PBXBookmark */ = 76AA5B67108DB5F10086B01D /* PBXBookmark */;
 			76AA5B68108DB5F10086B01D /* PBXBookmark */ = 76AA5B68108DB5F10086B01D /* PBXBookmark */;
 			76AA5B76108DB8480086B01D /* PBXTextBookmark */ = 76AA5B76108DB8480086B01D /* PBXTextBookmark */;
 			76AA5B77108DB8480086B01D /* PlistBookmark */ = 76AA5B77108DB8480086B01D /* PlistBookmark */;
@@ -124,7 +121,7 @@
 		argumentStrings = (
 		);
 		autoAttachOnCrash = 1;
-		breakpointsEnabled = 1;
+		breakpointsEnabled = 0;
 		configStateDict = {
 		};
 		customDataFormattersEnabled = 1;
@@ -163,6 +160,45 @@
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
 	};
+	766F1A35108E5E1300DA78E6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D80F4B6AC300CF3369 /* EtherTeXAppDelegate.h */;
+		name = "EtherTeXAppDelegate.h: 12";
+		rLen = 0;
+		rLoc = 265;
+		rType = 0;
+		vrLen = 560;
+		vrLoc = 0;
+	};
+	766F1A45108E60C900DA78E6 /* DisconnectedIcon.icns */ = {
+		uiCtxt = {
+			sepNavWindowFrame = "{{67, 0}, {733, 778}}";
+		};
+	};
+	766F1A49108E60E900DA78E6 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 766F1A45108E60C900DA78E6 /* DisconnectedIcon.icns */;
+	};
+	766F1A4A108E60E900DA78E6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */;
+		name = "EtherTeXAppDelegate.m: 31";
+		rLen = 0;
+		rLoc = 1125;
+		rType = 0;
+		vrLen = 1420;
+		vrLoc = 270;
+	};
+	766F1A78108E6F8700DA78E6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */;
+		name = "EtherTeXAppDelegate.m: 196";
+		rLen = 0;
+		rLoc = 7891;
+		rType = 0;
+		vrLen = 820;
+		vrLoc = 0;
+	};
 	76A149E6108DCB8D00B47971 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
@@ -171,36 +207,6 @@
 		rLoc = 243;
 		rType = 0;
 		vrLen = 243;
-		vrLoc = 0;
-	};
-	76A14A0E108DCFEB00B47971 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */;
-		name = "EtherTeXAppDelegate.m: 41";
-		rLen = 0;
-		rLoc = 1188;
-		rType = 0;
-		vrLen = 1162;
-		vrLoc = 612;
-	};
-	76A14A0F108DCFEB00B47971 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 256AC3D80F4B6AC300CF3369 /* EtherTeXAppDelegate.h */;
-		name = "EtherTeXAppDelegate.h: 26";
-		rLen = 0;
-		rLoc = 502;
-		rType = 0;
-		vrLen = 927;
-		vrLoc = 29;
-	};
-	76A14A12108DD02B00B47971 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 256AC3D80F4B6AC300CF3369 /* EtherTeXAppDelegate.h */;
-		name = "EtherTeXAppDelegate.h: 23";
-		rLen = 0;
-		rLoc = 502;
-		rType = 0;
-		vrLen = 507;
 		vrLoc = 0;
 	};
 	76AA5B0B108DA1CE0086B01D /* PBXTextBookmark */ = {
@@ -212,10 +218,6 @@
 		rType = 0;
 		vrLen = 147;
 		vrLoc = 0;
-	};
-	76AA5B67108DB5F10086B01D /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 76EE50AE108CCBD6004FF030 /* backgrad.gif */;
 	};
 	76AA5B68108DB5F10086B01D /* PBXBookmark */ = {
 		isa = PBXBookmark;
@@ -242,60 +244,6 @@
 		name = "/Users/djui/Desktop/EtherTeX/EtherTeX-Info.plist";
 		rLen = 0;
 		rLoc = 9223372036854775808;
-	};
-	76AA5BA0108DBEBE0086B01D /* EtherTeXAppDelegate.m:72 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		breakpointStyle = 0;
-		continueAfterActions = 0;
-		countType = 0;
-		delayBeforeContinue = 0;
-		fileReference = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */;
-		functionName = "-webView:didStartProvisionalLoadForFrame:";
-		hitCount = 0;
-		ignoreCount = 0;
-		lineNumber = 72;
-		location = EtherTeX;
-		modificationTime = 277729239.353633;
-		originalNumberOfMultipleMatches = 1;
-		state = 1;
-	};
-	76AA5BA2108DBEC00086B01D /* EtherTeXAppDelegate.m:80 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		breakpointStyle = 0;
-		continueAfterActions = 0;
-		countType = 0;
-		delayBeforeContinue = 0;
-		fileReference = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */;
-		functionName = "-webView:didReceiveTitle:forFrame:";
-		hitCount = 0;
-		ignoreCount = 0;
-		lineNumber = 80;
-		location = EtherTeX;
-		modificationTime = 277729239.372421;
-		originalNumberOfMultipleMatches = 1;
-		state = 1;
-	};
-	76AA5BA4108DBEC10086B01D /* EtherTeXAppDelegate.m:86 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		breakpointStyle = 0;
-		continueAfterActions = 0;
-		countType = 0;
-		delayBeforeContinue = 0;
-		fileReference = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */;
-		functionName = "-webView::forFrame:";
-		hitCount = 0;
-		ignoreCount = 0;
-		lineNumber = 86;
-		location = EtherTeX;
-		modificationTime = 277729239.398078;
-		originalNumberOfMultipleMatches = 1;
-		state = 1;
 	};
 	8D1107260486CEB800E47090 /* EtherTeX */ = {
 		activeExec = 0;
