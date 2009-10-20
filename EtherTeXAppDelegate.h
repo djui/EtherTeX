@@ -17,5 +17,7 @@
 }
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet WebView *webView;
+@property (assign) IBOutlet PDFView *pdfView;
 
 @end
