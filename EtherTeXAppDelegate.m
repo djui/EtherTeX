@@ -1,21 +1,45 @@
 //
-//  EtherTeXAppDelegate.m
-//  EtherTeX
+// EtherTeXAppDelegate.m
+// EtherTeX
 //
-//  Created by Uwe Dauernheim on 11.10.09.
-//  Copyright 2009 KTH. All rights reserved.
+// Created by Uwe Dauernheim on 11.10.09.
+// Copyright 2009 KTH. All rights reserved.
 //
 
 #import "EtherTeXAppDelegate.h"
 
 @implementation EtherTeXAppDelegate
 
-@synthesize window;
+@synthesize mainWindow;
 @synthesize webView;
 @synthesize pdfView;
+@synthesize parserIndicator;
+
+@synthesize tempfilePath;
+@synthesize pdflatexPath;
+@synthesize downloadInterval;
+
+/*
+NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
+							@"http://www.apple.com/macosx/", @"start-page-url",
+							@"NO",  @"underline_links",
+							nil]];
+
+NSString start_page_url = [defaults stringForKey:@"start_page_url"];
+BOOL underline_links = [defaults boolForKey:@"underline_links"];
+// ...
+[defaults setObject:new_start_page_url forKey:@"start_page_url"];
+*/
+
+/*
+unsigned bytesReceived;
+unsigned expectedContentLength = 10000;
+*/
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// TODO Save everything in UserDefaults
+	[self setDownloadInterval:[NSNumber numberWithInt:DOWNLOAD_INTERVAL]];
 	
 	// TODO Check for internet connection
 	NSURL *connectivityUrl = [NSURL URLWithString:@"http://www.etherpad.com"];
@@ -31,36 +55,76 @@
 		[alert setInformativeText: @"There is no internet connection available. Please establish an internet connection and restart the application."];
 		[alert setIcon: [NSImage imageNamed:@"DisconnectedIcon"]];
 		[alert setShowsSuppressionButton:YES];
-		[alert beginSheetModalForWindow:window modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];		
+		[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];		
 		[alert release];
 	}
 	
 	// TODO Check if there is a pdflatex file somewhere
-	NSArray *pdfLatexPaths = [NSArray arrayWithObjects: 
-							  @"/usr/texbin/pdflatex", 
-							  @"/usr/local/texlive/2008/bin/universal-darwin/pdflatex",
-							  nil];
+	NSArray *pdfLatexSearchPaths = [NSArray arrayWithObjects: 
+							 @"/usr/texbin/pdflatex", 
+							 @"/usr/local/texlive/2008/bin/universal-darwin/pdflatex",
+							 nil];
 	
-	NSString *pdfLatexPath = nil;
-	for (int i = 0; i < [pdfLatexPaths count]; i++) {
-		if ([[NSFileManager defaultManager] fileExistsAtPath:[pdfLatexPaths objectAtIndex:i]]) {
-			pdfLatexPath = [pdfLatexPaths objectAtIndex:i];
-			NSLog(@"FOUND at %@\n", pdfLatexPath);
+	[self setPdflatexPath:nil];
+	
+	for (NSString *pdfLatexSearchPath in pdfLatexSearchPaths) {
+		NSLog(@"Check for existance: %@", pdfLatexSearchPath);
+		
+		if ([[NSFileManager defaultManager] fileExistsAtPath:pdfLatexSearchPath]) {
+			[self setPdflatexPath:pdfLatexSearchPath];
+			NSLog(@"Found pdflatex at %@", [self pdflatexPath]);
+			break;
 		}
 	}
-	if (pdfLatexPath == nil) {	
+
+	if ([self pdflatexPath] == nil) {	
 		// TODO Only show the "no pdflatex available" warning if net already seen
 		if (YES) {
 			NSAlert* alert = [[NSAlert alloc] init];
 			[alert setAlertStyle:NSWarningAlertStyle];
 			[alert setMessageText: @"No pdflatex found"];
-			[alert setInformativeText: @"No pdflatex installation available, so no PDF previews can be generated. Please install a TeX distribution.\n(http://www.tug.org/mactex/)"];
+			[alert setInformativeText: @"No pdflatex installation available, so no PDF previews can be generated. Please install a TeX distribution.(http://www.tug.org/mactex/)"];
 			[alert setIcon: [NSImage imageNamed:@"AlertCautionIcon"]];
 			[alert setShowsSuppressionButton:YES];
-			[alert beginSheetModalForWindow:window modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];		
+			[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];		
 			[alert release];
 		}
 	}
+	
+	// Initially start the download & parsing machine once
+	[self startDownloadingURL];
+
+	// Set background worker
+/*
+	[parserIndicator setMinValue:0.0];
+	[parserIndicator setMaxValue:100];
+	[parserIndicator incrementBy:10.0];
+	[parserIndicator setDoubleValue:2.0];
+	[parserIndicator startAnimation:self];
+	NSTimer *timer = [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(checkThem:) userInfo:nil repeats:YES] retain];
+		[progressBar startAnimation: self];
+	}
+	
+	-(void)checkThem:(NSTimer *)aTimer
+	{
+		count++;
+		if(count > 100)
+		{
+			count = 0;
+			[timer invalidate];
+			[timer release];
+			timer = NULL;
+			[progressBar setDoubleValue:0.0];
+			[progressBar stopAnimation: self];
+		}
+		else
+		{
+			[progressBar setDoubleValue:(100.0 * count) / 100;
+			 }
+			 }
+*/	
+	
+	[NSTimer scheduledTimerWithTimeInterval:[[self downloadInterval] integerValue] target:self selector:@selector(tick:) userInfo:nil repeats:NO];
 }
 
 /*
@@ -69,100 +133,207 @@
 
 - (void)awakeFromNib {
 	[webView setFrameLoadDelegate:self];
-    [webView setUIDelegate:self];
-    [webView setResourceLoadDelegate:self];
+	[webView setUIDelegate:self];
+	[webView setResourceLoadDelegate:self];
+	//[webView setWantsLayer:YES];
 	
 	// TODO Hide everything until we have at least or web site completely finished loaded
+	[webView setHidden:YES];
+	[pdfView setHidden:YES];
 	
 	// Hide the window's toolbar
-	[window toggleToolbarShown:self];
+	[mainWindow toggleToolbarShown:self];
 	
 	// Get web address
-	NSString *protocol = [NSString stringWithString:@"http://"];
-	NSString *userId = [NSString stringWithString:@"kreisquadratur"];
-	NSString *domain = [NSString stringWithString:@"etherpad.com"];
-	NSString *padId = [NSString stringWithString:@"SA3"];
-	NSString *urlText = [NSString stringWithFormat:@"%@%@.%@/%@", protocol, userId, domain, padId];
+	NSString *TeamId = @"kreisquadratur";
+	NSString *domain = @"etherpad.com";
+	NSString *padId = @"SA3";
+	NSString *urlText = [NSString stringWithFormat:@"http://%@.%@/%@", TeamId, domain, padId];
 	NSURL *url = [NSURL URLWithString:urlText];
 	
 	// Display web site
 	[[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
 	
 	// Set main window's caption text
-	//	[window setRepresentedURL:url];
-	// [window setTitleWithRepresentedFilename:urlText];
+	[mainWindow setRepresentedURL:url];
 	
 	// Set main window's icon
-	NSString *imageName = [[NSBundle mainBundle] pathForResource:@"appl" ofType:@"icns"];
-	//	[[window standardWindowButton:NSWindowDocumentIconButton] setImage:[[NSImage alloc] initWithContentsOfFile:imageName]];
+	NSString *imageName = [[NSBundle mainBundle] pathForResource:@"app" ofType:@"icns"];
+	[[mainWindow standardWindowButton:NSWindowDocumentIconButton] setImage:[[NSImage alloc] initWithContentsOfFile:imageName]];
 	
 	// Set main window as edited
-	[window setDocumentEdited:YES];
-	
-    // Get PDF address
-	NSString *pdfPath = [[NSBundle mainBundle] pathForResource:@"Test" ofType:@"pdf"];
-	
-	// Display PDF
-	PDFDocument *pdfDoc = [[[PDFDocument alloc] initWithURL:[NSURL fileURLWithPath:pdfPath]] autorelease];
-	[pdfView setDocument:pdfDoc];
-	
-	// Start repetition background worker
-	NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(tick:) userInfo:nil repeats:YES];
-	[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+	[mainWindow setDocumentEdited:YES];
 }
 
 - (void)tick:(NSTimer *)theTimer {
 	// TODO Download the text file content
-	// Better use: http://developer.apple.com/mac/library/documentation/Cocoa/Conceptual/URLLoadingSystem/Tasks/UsingNSURLDownload.html#//apple_ref/doc/uid/20001839 or http://developer.apple.com/mac/library/documentation/Cocoa/Conceptual/URLLoadingSystem/Tasks/UsingNSURLConnection.html
-	NSString *protocol = [NSString stringWithString:@"http://"];
-	NSString *userId = [NSString stringWithString:@"kreisquadratur"];
-	NSString *domain = [NSString stringWithString:@"etherpad.com"];
-	NSString *padId = [NSString stringWithString:@"SA3"];
-	NSString *urlText = [NSString stringWithFormat:@"%@%@.%@/ep/pad/export/%@/latest?format=txt", protocol, userId, domain, padId];
-	NSURL *url = [NSURL URLWithString:urlText];
+	[self startDownloadingURL];
+}
 
-	NSData *content = [NSData dataWithContentsOfURL: url];
+- (void)startDownloadingURL {
+	NSString *TeamId = @"kreisquadratur";
+	NSString *domain = @"etherpad.com";
+	NSString *padId = @"SA3";
+	NSString *urlText = [NSString stringWithFormat:@"http://%@.%@/ep/pad/export/%@/latest?format=txt", TeamId, domain, padId];
+
+	NSLog(@"Downloading url: %@", urlText);
 	
-	// TODO Store it in a file (maybe optional due to direct stdin input?)
-	NSString *tempFileTemplate = [NSTemporaryDirectory() stringByAppendingPathComponent:@"ethertextfile.tex"];
-	const char *tempFileTemplateCString = [tempFileTemplate fileSystemRepresentation];
-	char *tempFileNameCString = (char *)malloc(strlen(tempFileTemplateCString) + 1);
-	strcpy(tempFileNameCString, tempFileTemplateCString);
-	int fileDescriptor = mkstemp(tempFileNameCString);
-	
-	NSString *tempFileName = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:tempFileNameCString length:strlen(tempFileNameCString)];
-	free(tempFileNameCString);
-		
-	[content writeToFile:tempFileName atomically:YES];
-	
-	NSLog(@"%@:\n", tempFileName);
-	NSLog(@"%d\n", content);
-	
-	// TODO Run "pdflatex"
-	// @"pdflatex -version" -> "pdfTeX 3.1415926-1.40.9-2.2 (Web2C 7.5.7)\n..."
-	NSString *pdfLatexPath = [NSString stringWithString: @"/usr/texbin/pdflatex"];
-	NSTask *task = [[NSTask alloc] init];
-	NSArray *arguments = [NSArray arrayWithObjects: @"-version", nil];
-	NSPipe *pipe = [NSPipe pipe];
-	NSFileHandle *file = [pipe fileHandleForReading];
-	
-	[task setLaunchPath: pdfLatexPath];
-	// [task setCurrentDirectoryPath: @""];
-	[task setArguments: arguments];	
-	[task setStandardOutput: pipe];
-	[task launch];
-	
-	NSData *data = [file readDataToEndOfFile];
-	NSString *string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];	
+	// Create the request
+	NSURL *url = [NSURL URLWithString:urlText];
+	NSURLRequest *theRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:DOWNLOAD_TIMEOUT];
+
+	// Create the temporary file for the download content
+	NSString *tempfileName = [NSString stringWithFormat: @"ethertex_%@_%@.tex", TeamId, padId];
+	[self setTempfilePath:[NSTemporaryDirectory() stringByAppendingPathComponent:tempfileName]];
+
+	// Create the connection with the request and start loading the data
+	NSURLDownload *theDownload = [[NSURLDownload alloc] initWithRequest:theRequest delegate:self];
+	[theDownload setDestination:[self tempfilePath] allowOverwrite:YES];	
+}
+
+-(void)download:(NSURLDownload *)download didCreateDestination:(NSString *)path {
+	NSLog(@"Final file destination: %@", path);
+}
+
+- (void)download:(NSURLDownload *)download didFailWithError:(NSError *)error {
+	[download release];	
+	NSLog(@"Download failed! Error - %@ %@", [error localizedDescription], [error userInfo]);
+	// Set background worker
+	[NSTimer scheduledTimerWithTimeInterval:[[self downloadInterval] integerValue] target:self selector:@selector(tick:) userInfo:nil repeats:NO];
+}
+
+- (void)downloadDidFinish:(NSURLDownload *)download {
+	[download release];
+	NSLog(@"Download did finish.");
+	[self parseTeXFile];
+}
+
+- (BOOL)checkParserResult:(int)resultStatus outputText:(NSString *)outputText {
+	NSLog(@"texParserTask status: %d", resultStatus);
 	
 	// TODO Check if no errors
-	
+	if (resultStatus == PDFLATEX_STATUS_SUCCESS) {
+		
+		NSLog(@"texParserTask succeeded.");
+	} else { // PDFLATEX_STATUS_FAILURE
+		NSLog(@"texParserTask possibly failed.");
+
+		if ([outputText rangeOfString:@"Output written on "].location == NSNotFound) {
+			NSLog(@"texParserTask failed.");
+			return NO;
+		} else {
+			NSLog(@"texParserTask succeeded. (tex file had errors)");
+		}
+	}
+		
 	// TODO Check if file exists
-	// if ([fileManager fileExistsAtPath:filePath]) {}
+	NSString *pdfFile = [[[self tempfilePath] stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
+	if (![[NSFileManager defaultManager] fileExistsAtPath:pdfFile]) {
+		NSLog(@"Can't find PDF file. TexParserTask failed after all?");		
+		return NO;
+	}
 	
-	// TODO Update either gray screen or new PDF
-	
+	return YES;
 }
+
+- (void)parseTeXFile {
+	NSLog(@"texParserTask: Parsing downloaded tex file...");
+
+	NSString *workingDirectory = [[self tempfilePath] stringByDeletingLastPathComponent];
+	NSString *texFile = [[self tempfilePath] lastPathComponent];
+	
+	// TODO Run "pdflatex" : @"pdflatex -version" -> "pdfTeX 3.1415926-1.40.9-2.2 (Web2C 7.5.7)..."
+	NSTask *texParserTask = [[NSTask alloc] init];
+	NSArray *arguments = [NSArray arrayWithObjects:@"-interaction=nonstopmode", texFile, nil];
+	NSPipe *pipe = [NSPipe pipe];
+	NSFileHandle *outputHandle = [pipe fileHandleForReading];
+	
+	[texParserTask setLaunchPath:[self pdflatexPath]];
+	[texParserTask setCurrentDirectoryPath:workingDirectory];
+	[texParserTask setArguments:arguments];	
+	[texParserTask setStandardOutput:pipe];
+	[texParserTask setStandardError:[NSFileHandle fileHandleWithNullDevice]];
+	NSLog(@"texParserTask: Launching...");
+	[texParserTask launch];
+	NSLog(@"texParserTask: Launched");
+	[texParserTask waitUntilExit];
+	NSLog(@"texParserTask: Exit");
+	
+	NSData *data = [outputHandle readDataToEndOfFile];
+	NSString *outputText = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	
+	BOOL success = [self checkParserResult:[texParserTask terminationStatus] outputText:outputText];
+	if (success) {
+		// Store all current and needed PDF view settings (scrollbar position, zoom level, etc.)
+		// PDFDestination *currentPosition = [pdfView currentDestination];
+		
+		// Display PDF
+		NSString *pdfFile = [[[self tempfilePath] stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
+		PDFDocument *pdfDoc = [[[PDFDocument alloc] initWithURL:[NSURL fileURLWithPath:pdfFile]] autorelease];
+		[pdfView setDocument:pdfDoc];
+		[pdfView setHidden:NO];
+		
+		// Restore all old values
+		// TODO CRASHES: maybe split in page and point?
+		//[pdfView goToDestination: currentPosition];
+		
+		NSArray *filters = nil;
+		CIFilter *filter = [CIFilter filterWithName:@"CIMaximumComponent"];
+		[filter setDefaults];
+		filters = [NSArray arrayWithObject:filter];
+		 
+		[NSAnimationContext beginGrouping];
+		[[NSAnimationContext currentContext] setDuration:1.5];
+		[[[[self mainWindow] contentView] animator] setContentFilters:filters];
+		[NSAnimationContext endGrouping];
+	} else {
+		// Gray out the PDF view
+		/*
+		 NSArray *filters = nil;
+		 CIFilter *filter = [CIFilter filterWithName:@"CIPointillize"];
+		 [filter setDefaults];
+		 [filter setValue:[NSNumber numberWithFloat:4.0] forKey:@"inputRadius"];
+		 filters = [NSArray arrayWithObject:filter];
+		 
+		 [NSAnimationContext beginGrouping];
+		 [[NSAnimationContext currentContext] setDuration:1.5];
+		 // [[[[self window] contentView] animator] replaceSubview:previousView with:view];
+		 // [[[self window] animator] setFrame:newFrame display:YES];
+		 [[webView animator] setContentFilters:filters];
+		 [NSAnimationContext endGrouping];		
+		 */
+	}
+	
+	// Set background worker
+	[NSTimer scheduledTimerWithTimeInterval:[[self downloadInterval] integerValue] target:self selector:@selector(tick:) userInfo:nil repeats:NO];
+}
+
+/*
+- (void)setDownloadResponse:(NSURLResponse *)aDownloadResponse {
+ [aDownloadResponse retain];
+ [downloadResponse release];
+ downloadResponse = aDownloadResponse;
+}
+
+- (void)download:(NSURLDownload *)download didReceiveResponse:(NSURLResponse *)response {
+ bytesReceived=0;
+	
+ [self setDownloadResponse:response];
+}
+
+- (void)download:(NSURLDownload *)download didReceiveDataOfLength:(unsigned)length {
+ long long expectedLength=[[self downloadResponse] expectedContentLength];
+	
+ bytesReceived=bytesReceived+length;
+	
+ if (expectedLength != NSURLResponseUnknownLength) {
+ float percentComplete=(bytesReceived/(float)expectedLength)*100.0;
+ NSLog(@"Percent complete - %f",percentComplete);
+ } else {
+ NSLog(@"Bytes received - %d",bytesReceived);
+ }
+}
+*/
 
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void*)contextInfo {
 	if ([[alert suppressionButton] state] == NSOnState) {
@@ -183,23 +354,29 @@
 }
 
 - (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame {
-    if (frame == [sender mainFrame]) {
-        NSString *urlText = [[[[frame provisionalDataSource] request] URL] absoluteString];
+	if (frame == [sender mainFrame]) {
+		NSString *urlText = [[[[frame provisionalDataSource] request] URL] absoluteString];
 		NSURL *url = [NSURL URLWithString:urlText];
-		[window setRepresentedURL:url];
-    }
+		[mainWindow setRepresentedURL:url];
+	}
 }
 
 - (void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame {
-    if (frame == [sender mainFrame]) {
-        [[sender window] setTitle:title];
-    }
+	if (frame == [sender mainFrame]) {
+		[mainWindow setTitle:title];
+	}
 }
 
 - (void)webView:(WebView *)sender didReceiveIcon:(NSImage *)image forFrame:(WebFrame *)frame {
-    if (frame == [sender mainFrame]) {
-		[[[sender window] standardWindowButton:NSWindowDocumentIconButton] setImage:image];
-    }
+	if (frame == [sender mainFrame]) {
+		[[mainWindow standardWindowButton:NSWindowDocumentIconButton] setImage:image];
+	}
+}
+
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame {
+	if (frame == [sender mainFrame]) {
+		[webView performSelector:@selector(setHidden:) withObject:NO afterDelay:1];
+	}
 }
 
 @end
