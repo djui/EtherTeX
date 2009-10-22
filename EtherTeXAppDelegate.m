@@ -3,7 +3,7 @@
 // EtherTeX
 //
 // Created by Uwe Dauernheim on 11.10.09.
-// Copyright 2009 KTH. All rights reserved.
+// Copyright 2009 Kreisquadratur. All rights reserved.
 //
 
 #import "EtherTeXAppDelegate.h"
@@ -16,128 +16,50 @@
 @synthesize parserIndicator;
 
 @synthesize tempfilePath;
-@synthesize pdflatexPath;
-@synthesize downloadInterval;
-
-/*
-NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-							@"http://www.apple.com/macosx/", @"start-page-url",
-							@"NO",  @"underline_links",
-							nil]];
-
-NSString start_page_url = [defaults stringForKey:@"start_page_url"];
-BOOL underline_links = [defaults boolForKey:@"underline_links"];
-// ...
-[defaults setObject:new_start_page_url forKey:@"start_page_url"];
-*/
+@synthesize	defaults;
 
 /*
  unsigned bytesReceived;
  unsigned expectedContentLength = 10000;
- */
+*/
 
-- (void)checkForConnectivity {
-	NSURL *connectivityUrl = [NSURL URLWithString:@"http://www.etherpad.com"];
-	CFNetDiagnosticRef diag = CFNetDiagnosticCreateWithURL(NULL, (CFURLRef)connectivityUrl);
-	CFNetDiagnosticStatus status = CFNetDiagnosticCopyNetworkStatusPassively(diag, NULL);
-	CFRelease(diag);
-	
-	if (status != kCFNetDiagnosticConnectionUp) {
-		NSLog (@"Connection is down");
-		NSAlert* alert = [[NSAlert alloc] init];
-		[alert setAlertStyle:NSWarningAlertStyle];
-		[alert setMessageText: @"No internet connection"];
-		[alert setInformativeText: @"There is no internet connection available. Please establish an internet connection and restart the application."];
-		[alert setIcon: [NSImage imageNamed:@"DisconnectedIcon"]];
-		[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:@selector(noConnectivityAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
-		[alert release];
-	}
-}
-
-- (void)noConnectivityAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void*)contextInfo {
-	// TODO Quit the application
-	[mainWindow close];
-}
-
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	// TODO Save everything in UserDefaults
-	[self setDownloadInterval:[NSNumber numberWithInt:DOWNLOAD_INTERVAL]];
-	
-	[self checkForConnectivity];
-
-	
-	// TODO Check if there is a pdflatex file somewhere
-	NSArray *pdfLatexSearchPaths = [NSArray arrayWithObjects: 
-							 @"/usr/texbin/pdflatex", 
-							 @"/usr/local/texlive/2008/bin/universal-darwin/pdflatex",
-							 nil];
-	
-	[self setPdflatexPath:nil];
-	
-	for (NSString *pdfLatexSearchPath in pdfLatexSearchPaths) {
-		NSLog(@"Check for existance: %@", pdfLatexSearchPath);
+- (id)init {
+	if ((self = [super init])) {
+		NSLog(@"TEST");
 		
-		if ([[NSFileManager defaultManager] fileExistsAtPath:pdfLatexSearchPath]) {
-			[self setPdflatexPath:pdfLatexSearchPath];
-			NSLog(@"Found pdflatex at %@", [self pdflatexPath]);
-			break;
+		defaults = [NSUserDefaults standardUserDefaults];
+		[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
+																@"60", @"download_interval",
+																@"etherpad.com", @"domain",
+																@"kreisquadratur", @"team_id",
+																@"SA3", @"pad_id",
+																@"", @"pdflatex_path",
+																@"NO", @"ignore_no_pdflatex",
+																nil]];
+	}
+
+	return self;
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {	
+	[self checkForConnectivity];
+	
+	if ([defaults stringForKey:@"pdflatex_path"] == @"") {
+		[self searchForAndSetPDFLatexPath];
+	}
+	
+  if ([defaults stringForKey:@"pdflatex_path"] == @"") {
+		if (![defaults boolForKey:@"ignore_no_pdflatex"]) {
+			[self warnNoPDFLatexAvailable];
 		}
 	}
 
-	if ([self pdflatexPath] == nil) {	
-		// TODO Only show the "no pdflatex available" warning if net already seen
-		if (YES) {
-			NSAlert* alert = [[NSAlert alloc] init];
-			[alert setAlertStyle:NSWarningAlertStyle];
-			[alert setMessageText: @"No pdflatex found"];
-			[alert setInformativeText: @"No pdflatex installation available, so no PDF previews can be generated. Please install a TeX distribution.(http://www.tug.org/mactex/)"];
-			[alert setIcon: [NSImage imageNamed:@"AlertCautionIcon"]];
-			[alert setShowsSuppressionButton:YES];
-			[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];		
-			[alert release];
-		}
-	}
-	
-	// Initially start the download & parsing machine once
 	[self startDownloadingURL];
 
-	// Set background worker
-/*
-	[parserIndicator setMinValue:0.0];
-	[parserIndicator setMaxValue:100];
-	[parserIndicator incrementBy:10.0];
-	[parserIndicator setDoubleValue:2.0];
-	[parserIndicator startAnimation:self];
-	NSTimer *timer = [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(checkThem:) userInfo:nil repeats:YES] retain];
-		[progressBar startAnimation: self];
-	}
-	
-	-(void)checkThem:(NSTimer *)aTimer
-	{
-		count++;
-		if(count > 100)
-		{
-			count = 0;
-			[timer invalidate];
-			[timer release];
-			timer = NULL;
-			[progressBar setDoubleValue:0.0];
-			[progressBar stopAnimation: self];
-		}
-		else
-		{
-			[progressBar setDoubleValue:(100.0 * count) / 100;
-			 }
-			 }
-*/	
-	
-	[NSTimer scheduledTimerWithTimeInterval:[[self downloadInterval] integerValue] target:self selector:@selector(tick:) userInfo:nil repeats:NO];
+	[NSTimer scheduledTimerWithTimeInterval:[defaults integerForKey:@"download_interval"] 
+																target:self selector:@selector(tick:) 
+																userInfo:nil repeats:NO];
 }
-
-/*
- - (void)applicationWillFinishLaunching:(NSNotification *)aNotification {}
- */
 
 - (void)awakeFromNib {
 	[webView setFrameLoadDelegate:self];
@@ -153,9 +75,9 @@ BOOL underline_links = [defaults boolForKey:@"underline_links"];
 	[mainWindow toggleToolbarShown:self];
 	
 	// Get web address
-	NSString *TeamId = @"kreisquadratur";
-	NSString *domain = @"etherpad.com";
-	NSString *padId = @"SA3";
+	NSString *TeamId = [defaults stringForKey:@"group_id"];
+	NSString *domain = [defaults stringForKey:@"domain"];
+	NSString *padId = [defaults stringForKey:@"pad_id"];
 	NSString *urlText = [NSString stringWithFormat:@"http://%@.%@/%@", TeamId, domain, padId];
 	NSURL *url = [NSURL URLWithString:urlText];
 	
@@ -167,11 +89,102 @@ BOOL underline_links = [defaults boolForKey:@"underline_links"];
 	
 	// Set main window's icon
 	NSString *imageName = [[NSBundle mainBundle] pathForResource:@"app" ofType:@"icns"];
-	[[mainWindow standardWindowButton:NSWindowDocumentIconButton] setImage:[[NSImage alloc] initWithContentsOfFile:imageName]];
+	NSImage *windowIcon = [[NSImage alloc] initWithContentsOfFile:imageName];
+	[[mainWindow standardWindowButton:NSWindowDocumentIconButton] setImage:windowIcon];
 	
 	// Set main window as edited
 	[mainWindow setDocumentEdited:YES];
 }
+
+- (void)checkForConnectivity {
+	NSString *domain = [defaults stringForKey:@"domain"];
+	NSString *urlText = [NSString stringWithFormat:@"http://www.%@/", domain];	
+	NSURL *connectivityUrl = [NSURL URLWithString:urlText];
+	CFNetDiagnosticRef diag = CFNetDiagnosticCreateWithURL(NULL, (CFURLRef)connectivityUrl);
+	CFNetDiagnosticStatus status = CFNetDiagnosticCopyNetworkStatusPassively(diag, NULL);
+	CFRelease(diag);
+	
+	if (status != kCFNetDiagnosticConnectionUp) {
+		NSLog(@"Connection is down");
+		NSAlert* alert = [[NSAlert alloc] init];
+		[alert setAlertStyle:NSWarningAlertStyle];
+		[alert setMessageText:NSLocalizedString(@"No Connectivity", nil)];
+		[alert setInformativeText:NSLocalizedString(@"There is no internet connection available. Please establish an internet connection and restart the application.", nil)];
+		[alert setIcon: [NSImage imageNamed:@"DisconnectedIcon"]];
+		[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:@selector(noConnectivityAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+		[alert release];
+	}
+}
+
+- (void)noConnectivityAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void*)contextInfo {
+	// TODO Quit the application
+	[mainWindow close];
+}
+
+- (void)searchForAndSetPDFLatexPath {
+	// Check if there is a pdflatex file somewhere
+	NSArray *pdfLatexSearchPaths = [NSArray arrayWithObjects: 
+																	@"/usr/texbin/pdflatex", 
+																	@"/usr/local/texlive/2008/bin/universal-darwin/pdflatex",
+																	nil];
+		
+	for (NSString *pdfLatexSearchPath in pdfLatexSearchPaths) {
+		NSLog(@"Check for existance: %@", pdfLatexSearchPath);
+		
+		if ([[NSFileManager defaultManager] fileExistsAtPath:pdfLatexSearchPath]) {
+			[defaults setObject:pdfLatexSearchPath forKey:@"pdflatex_path"];
+			NSLog(@"Found pdflatex at %@", pdfLatexSearchPath);
+			break;
+		}
+	}
+}
+
+- (void)warnNoPDFLatexAvailable {
+	NSAlert* alert = [[NSAlert alloc] init];
+	[alert setAlertStyle:NSWarningAlertStyle];
+	[alert setMessageText:NSLocalizedString(@"No pdflatex found", nil)];
+	[alert setInformativeText:NSLocalizedString(@"No pdflatex installation available, so no PDF previews can be generated. Please install a TeX distribution.(http://www.tug.org/mactex/)", nil)];
+	[alert setIcon:[NSImage imageNamed:@"AlertCautionIcon"]];
+	[alert setShowsSuppressionButton:YES];
+	[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:@selector(noPDFLatexAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];		
+	[alert release];
+}
+
+- (void)noPDFLatexAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void*)contextInfo {
+	if ([[alert suppressionButton] state] == NSOnState) {
+		[defaults setBool:YES forKey:@"ignore_no_pdflatex"];
+	}
+}
+
+// Set background worker
+/*
+ [parserIndicator setMinValue:0.0];
+ [parserIndicator setMaxValue:100];
+ [parserIndicator incrementBy:10.0];
+ [parserIndicator setDoubleValue:2.0];
+ [parserIndicator startAnimation:self];
+ NSTimer *timer = [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(checkThem:) userInfo:nil repeats:YES] retain];
+ [progressBar startAnimation: self];
+ }
+ 
+ -(void)checkThem:(NSTimer *)aTimer
+ {
+ count++;
+ if(count > 100)
+ {
+ count = 0;
+ [timer invalidate];
+ [timer release];
+ timer = NULL;
+ [progressBar setDoubleValue:0.0];
+ [progressBar stopAnimation: self];
+ }
+ else
+ {
+ [progressBar setDoubleValue:(100.0 * count) / 100;
+ }
+ }
+ */	
 
 - (void)tick:(NSTimer *)theTimer {
 	// TODO Download the text file content
@@ -179,9 +192,9 @@ BOOL underline_links = [defaults boolForKey:@"underline_links"];
 }
 
 - (void)startDownloadingURL {
-	NSString *TeamId = @"kreisquadratur";
-	NSString *domain = @"etherpad.com";
-	NSString *padId = @"SA3";
+	NSString *TeamId = [defaults stringForKey:@"team_id"];
+	NSString *domain = [defaults stringForKey:@"domain"];
+	NSString *padId = [defaults stringForKey:@"pad_id"];
 	NSString *urlText = [NSString stringWithFormat:@"http://%@.%@/ep/pad/export/%@/latest?format=txt", TeamId, domain, padId];
 
 	NSLog(@"Downloading url: %@", urlText);
@@ -207,7 +220,7 @@ BOOL underline_links = [defaults boolForKey:@"underline_links"];
 	[download release];	
 	NSLog(@"Download failed! Error - %@ %@", [error localizedDescription], [error userInfo]);
 	// Set background worker
-	[NSTimer scheduledTimerWithTimeInterval:[[self downloadInterval] integerValue] target:self selector:@selector(tick:) userInfo:nil repeats:NO];
+	[NSTimer scheduledTimerWithTimeInterval:[defaults integerForKey:@"download_interval"] target:self selector:@selector(tick:) userInfo:nil repeats:NO];
 }
 
 - (void)downloadDidFinish:(NSURLDownload *)download {
@@ -256,7 +269,7 @@ BOOL underline_links = [defaults boolForKey:@"underline_links"];
 	NSPipe *pipe = [NSPipe pipe];
 	NSFileHandle *outputHandle = [pipe fileHandleForReading];
 	
-	[texParserTask setLaunchPath:[self pdflatexPath]];
+	[texParserTask setLaunchPath:[defaults stringForKey:@"pdflatex_path"]];
 	[texParserTask setCurrentDirectoryPath:workingDirectory];
 	[texParserTask setArguments:arguments];	
 	[texParserTask setStandardOutput:pipe];
@@ -313,7 +326,7 @@ BOOL underline_links = [defaults boolForKey:@"underline_links"];
 	}
 	
 	// Set background worker
-	[NSTimer scheduledTimerWithTimeInterval:[[self downloadInterval] integerValue] target:self selector:@selector(tick:) userInfo:nil repeats:NO];
+	[NSTimer scheduledTimerWithTimeInterval:[defaults integerForKey:@"download_interval"] target:self selector:@selector(tick:) userInfo:nil repeats:NO];
 }
 
 /*
@@ -342,12 +355,6 @@ BOOL underline_links = [defaults boolForKey:@"underline_links"];
  }
 }
 */
-
-- (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void*)contextInfo {
-	if ([[alert suppressionButton] state] == NSOnState) {
-		// TODO Add a note to the configuration, that this popup should not be shown again
-	}	
-}
 
 - (BOOL)window:(NSWindow *)sender shouldPopUpDocumentPathMenu:(NSMenu *)titleMenu {
 	return NO;
@@ -386,5 +393,5 @@ BOOL underline_links = [defaults boolForKey:@"underline_links"];
 		[webView performSelector:@selector(setHidden:) withObject:NO afterDelay:1];
 	}
 }
-
+	
 @end

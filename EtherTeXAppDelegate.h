@@ -3,7 +3,7 @@
 //  EtherTeX
 //
 //  Created by Uwe Dauernheim on 11.10.09.
-//  Copyright 2009 KTH. All rights reserved.
+//  Copyright 2009 Kreisquadratur. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
@@ -19,11 +19,9 @@
 	IBOutlet NSProgressIndicator *parserIndicator;
 	
 	NSString *tempfilePath;
-	NSString *pdflatexPath;
-	NSNumber *downloadInterval;
+	NSUserDefaults *defaults;
 }
 
-int DOWNLOAD_INTERVAL = 10;
 int DOWNLOAD_TIMEOUT = 60;
 int PDFLATEX_STATUS_SUCCESS = 0;
 int PDFLATEX_STATUS_FAILURE = 1;
@@ -34,9 +32,11 @@ int PDFLATEX_STATUS_FAILURE = 1;
 @property (assign) IBOutlet NSProgressIndicator *parserIndicator;
 
 @property (copy) NSString *tempfilePath;
-@property (copy) NSString *pdflatexPath;
-@property (assign) NSNumber *downloadInterval;
+@property (assign) NSUserDefaults *defaults;
 
+- (void)checkForConnectivity;
+- (void)searchForAndSetPDFLatexPath;
+- (void)warnNoPDFLatexAvailable;
 - (void)startDownloadingURL;
 - (void)parseTeXFile;
 - (BOOL)checkParserResult:(int)resultStatus outputText:(NSString *)outputText;

@@ -1,0 +1,7 @@
+"No Connectivity" = "No Connectivity"
+
+"There is no internet connection available. Please establish an internet connection and restart the application." = "There is no internet connection available. Please establish an internet connection and restart the application."
+
+"No pdflatex found" = "No pdflatex found"
+
+"No pdflatex installation available, so no PDF previews can be generated. Please install a TeX distribution. (http://www.tug.org/mactex/)" = "No pdflatex installation available, so no PDF previews can be generated. Please install a TeX distribution. (http://www.tug.org/mactex/)"
