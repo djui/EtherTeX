@@ -5,3 +5,5 @@
 "No pdflatex found" = "No pdflatex found"
 
 "No pdflatex installation available, so no PDF previews can be generated. Please install a TeX distribution. (http://www.tug.org/mactex/)" = "No pdflatex installation available, so no PDF previews can be generated. Please install a TeX distribution. (http://www.tug.org/mactex/)"
+
+"Error loading page" = "Error loading page"

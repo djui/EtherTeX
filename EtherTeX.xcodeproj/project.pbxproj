@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainWindow.xib */; };
-		256AC3DA0F4B6AC300CF3369 /* EtherTeXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */; };
-		762111AB1090B69300D49798 /* EtherTeXAppDelegate.strings in Resources */ = {isa = PBXBuildFile; fileRef = 762111AA1090B69300D49798 /* EtherTeXAppDelegate.strings */; };
+		762111AB1090B69300D49798 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 762111AA1090B69300D49798 /* Localizable.strings */; };
 		766F19A6108E2BF600DA78E6 /* AlertCautionIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 766F19A5108E2BF600DA78E6 /* AlertCautionIcon.icns */; };
 		766F1A46108E60C900DA78E6 /* DisconnectedIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 766F1A45108E60C900DA78E6 /* DisconnectedIcon.icns */; };
 		76AA5ADD108D95660086B01D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76AA5A34108D95650086B01D /* WebKit.framework */; };
 		76AA5B60108DB5810086B01D /* app.icns in Resources */ = {isa = PBXBuildFile; fileRef = 76AA5B5F108DB5810086B01D /* app.icns */; };
 		76D83D8E108F066000F26C7C /* Ideas.txt in Resources */ = {isa = PBXBuildFile; fileRef = 76D83D8D108F066000F26C7C /* Ideas.txt */; };
 		76EE507D108CCAB0004FF030 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76EE5024108CCAB0004FF030 /* Quartz.framework */; };
+		76F0B82A1090D3E400BA78B3 /* EtherTeXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -32,14 +32,15 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		762111901090B17800D49798 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/EtherTeXAppDelegate.strings; sourceTree = "<group>"; };
-		762111AC1090B6A400D49798 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/EtherTeXAppDelegate.strings; sourceTree = "<group>"; };
+		762111901090B17800D49798 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		762111AC1090B6A400D49798 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
 		766F19A5108E2BF600DA78E6 /* AlertCautionIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AlertCautionIcon.icns; sourceTree = "<group>"; };
 		766F1A45108E60C900DA78E6 /* DisconnectedIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DisconnectedIcon.icns; sourceTree = "<group>"; };
 		76AA5A34108D95650086B01D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		76AA5B5F108DB5810086B01D /* app.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = app.icns; sourceTree = "<group>"; };
 		76D83D8D108F066000F26C7C /* Ideas.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Ideas.txt; sourceTree = "<group>"; };
 		76EE5024108CCAB0004FF030 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
+		76F0B8261090D3A000BA78B3 /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* EtherTeX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "EtherTeX-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* EtherTeX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EtherTeX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -126,7 +127,7 @@
 				8D1107310486CEB800E47090 /* EtherTeX-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainWindow.xib */,
-				762111AA1090B69300D49798 /* EtherTeXAppDelegate.strings */,
+				762111AA1090B69300D49798 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -192,7 +193,7 @@
 				766F19A6108E2BF600DA78E6 /* AlertCautionIcon.icns in Resources */,
 				766F1A46108E60C900DA78E6 /* DisconnectedIcon.icns in Resources */,
 				76D83D8E108F066000F26C7C /* Ideas.txt in Resources */,
-				762111AB1090B69300D49798 /* EtherTeXAppDelegate.strings in Resources */,
+				762111AB1090B69300D49798 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
-				256AC3DA0F4B6AC300CF3369 /* EtherTeXAppDelegate.m in Sources */,
+				76F0B82A1090D3E400BA78B3 /* EtherTeXAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,17 +224,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				1DDD58150DA1D0A300B32029 /* English */,
+				76F0B8261090D3A000BA78B3 /* German */,
 			);
 			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
-		762111AA1090B69300D49798 /* EtherTeXAppDelegate.strings */ = {
+		762111AA1090B69300D49798 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				762111901090B17800D49798 /* English */,
 				762111AC1090B6A400D49798 /* German */,
 			);
-			name = EtherTeXAppDelegate.strings;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

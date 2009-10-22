@@ -25,13 +25,11 @@
 
 - (id)init {
 	if ((self = [super init])) {
-		NSLog(@"TEST");
-		
 		defaults = [NSUserDefaults standardUserDefaults];
 		[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 																@"60", @"download_interval",
 																@"etherpad.com", @"domain",
-																@"kreisquadratur", @"team_id",
+																@"kreisquadratur", @"teamsite_id",
 																@"SA3", @"pad_id",
 																@"", @"pdflatex_path",
 																@"NO", @"ignore_no_pdflatex",
@@ -75,10 +73,10 @@
 	[mainWindow toggleToolbarShown:self];
 	
 	// Get web address
-	NSString *TeamId = [defaults stringForKey:@"group_id"];
+	NSString *TeamsiteId = [defaults stringForKey:@"teamsite_id"];
 	NSString *domain = [defaults stringForKey:@"domain"];
 	NSString *padId = [defaults stringForKey:@"pad_id"];
-	NSString *urlText = [NSString stringWithFormat:@"http://%@.%@/%@", TeamId, domain, padId];
+	NSString *urlText = [NSString stringWithFormat:@"http://%@.%@/%@", TeamsiteId, domain, padId];
 	NSURL *url = [NSURL URLWithString:urlText];
 	
 	// Display web site
@@ -106,7 +104,7 @@
 	
 	if (status != kCFNetDiagnosticConnectionUp) {
 		NSLog(@"Connection is down");
-		NSAlert* alert = [[NSAlert alloc] init];
+		NSAlert *alert = [[NSAlert alloc] init];
 		[alert setAlertStyle:NSWarningAlertStyle];
 		[alert setMessageText:NSLocalizedString(@"No Connectivity", nil)];
 		[alert setInformativeText:NSLocalizedString(@"There is no internet connection available. Please establish an internet connection and restart the application.", nil)];
@@ -140,7 +138,7 @@
 }
 
 - (void)warnNoPDFLatexAvailable {
-	NSAlert* alert = [[NSAlert alloc] init];
+	NSAlert *alert = [[NSAlert alloc] init];
 	[alert setAlertStyle:NSWarningAlertStyle];
 	[alert setMessageText:NSLocalizedString(@"No pdflatex found", nil)];
 	[alert setInformativeText:NSLocalizedString(@"No pdflatex installation available, so no PDF previews can be generated. Please install a TeX distribution.(http://www.tug.org/mactex/)", nil)];
@@ -192,10 +190,10 @@
 }
 
 - (void)startDownloadingURL {
-	NSString *TeamId = [defaults stringForKey:@"team_id"];
+	NSString *TeamsiteId = [defaults stringForKey:@"teamsite_id"];
 	NSString *domain = [defaults stringForKey:@"domain"];
 	NSString *padId = [defaults stringForKey:@"pad_id"];
-	NSString *urlText = [NSString stringWithFormat:@"http://%@.%@/ep/pad/export/%@/latest?format=txt", TeamId, domain, padId];
+	NSString *urlText = [NSString stringWithFormat:@"http://%@.%@/ep/pad/export/%@/latest?format=txt", TeamsiteId, domain, padId];
 
 	NSLog(@"Downloading url: %@", urlText);
 	
@@ -204,7 +202,7 @@
 	NSURLRequest *theRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:DOWNLOAD_TIMEOUT];
 
 	// Create the temporary file for the download content
-	NSString *tempfileName = [NSString stringWithFormat: @"ethertex_%@_%@.tex", TeamId, padId];
+	NSString *tempfileName = [NSString stringWithFormat: @"ethertex_%@_%@.tex", TeamsiteId, padId];
 	[self setTempfilePath:[NSTemporaryDirectory() stringByAppendingPathComponent:tempfileName]];
 
 	// Create the connection with the request and start loading the data
@@ -366,6 +364,25 @@
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication {
 	return YES;
+}
+
+- (void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame {
+	if (frame == [sender mainFrame]) {
+		NSString *errorText = [NSString stringWithFormat:@"%@\n(%@)", 
+													 [error localizedDescription],
+													 [[[[frame provisionalDataSource] initialRequest] URL] absoluteString]]; 
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert setAlertStyle:NSWarningAlertStyle];
+		[alert setMessageText:NSLocalizedString(@"Error loading page", nil)];
+		[alert setInformativeText:errorText];
+		[alert setIcon:[NSImage imageNamed:@"AlertCautionIcon"]];
+		[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:@selector(PageLoadErrorAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];		
+		[alert release];
+	}
+}
+
+- (void)PageLoadErrorAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void*)contextInfo {
+	// TODO Reload?
 }
 
 - (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame {

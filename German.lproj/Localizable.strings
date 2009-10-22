@@ -5,3 +5,5 @@
 "No pdflatex found" = "Kein pdflatex gefunden"
 
 "No pdflatex installation available, so no PDF previews can be generated. Please install a TeX distribution. (http://www.tug.org/mactex/)" = "Keine pdflatex Installation vorhanden, somit kann keine PDF Vorschau erstellt werden. Bitte installieren Sie eine TeX Distribution. (http://www.tug.org/mactex/)"
+
+"Error loading page" = "Fehler beim Laden der Seite"
