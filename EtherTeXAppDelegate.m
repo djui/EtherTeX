@@ -33,15 +33,11 @@ BOOL underline_links = [defaults boolForKey:@"underline_links"];
 */
 
 /*
-unsigned bytesReceived;
-unsigned expectedContentLength = 10000;
-*/
+ unsigned bytesReceived;
+ unsigned expectedContentLength = 10000;
+ */
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	// TODO Save everything in UserDefaults
-	[self setDownloadInterval:[NSNumber numberWithInt:DOWNLOAD_INTERVAL]];
-	
-	// TODO Check for internet connection
+- (void)checkForConnectivity {
 	NSURL *connectivityUrl = [NSURL URLWithString:@"http://www.etherpad.com"];
 	CFNetDiagnosticRef diag = CFNetDiagnosticCreateWithURL(NULL, (CFURLRef)connectivityUrl);
 	CFNetDiagnosticStatus status = CFNetDiagnosticCopyNetworkStatusPassively(diag, NULL);
@@ -54,10 +50,22 @@ unsigned expectedContentLength = 10000;
 		[alert setMessageText: @"No internet connection"];
 		[alert setInformativeText: @"There is no internet connection available. Please establish an internet connection and restart the application."];
 		[alert setIcon: [NSImage imageNamed:@"DisconnectedIcon"]];
-		[alert setShowsSuppressionButton:YES];
-		[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];		
+		[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:@selector(noConnectivityAlertDidEnd:returnCode:contextInfo:) contextInfo:nil];
 		[alert release];
 	}
+}
+
+- (void)noConnectivityAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void*)contextInfo {
+	// TODO Quit the application
+	[mainWindow close];
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+	// TODO Save everything in UserDefaults
+	[self setDownloadInterval:[NSNumber numberWithInt:DOWNLOAD_INTERVAL]];
+	
+	[self checkForConnectivity];
+
 	
 	// TODO Check if there is a pdflatex file somewhere
 	NSArray *pdfLatexSearchPaths = [NSArray arrayWithObjects: 
