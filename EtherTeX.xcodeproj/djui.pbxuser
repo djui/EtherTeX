@@ -9,7 +9,7 @@
 	};
 	256AC3D80F4B6AC300CF3369 /* EtherTeXAppDelegate.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {888, 630}}";
+			sepNavIntBoundsRect = "{{0, 0}, {888, 645}}";
 			sepNavSelRange = "{312, 8}";
 			sepNavVisRange = "{0, 1157}";
 			sepNavWindowFrame = "{{67, 0}, {733, 778}}";
@@ -18,7 +18,7 @@
 	256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1356, 5810}}";
-			sepNavSelRange = "{5847, 0}";
+			sepNavSelRange = "{6055, 0}";
 			sepNavVisRange = "{5478, 1500}";
 			sepNavWindowFrame = "{{67, 0}, {733, 778}}";
 		};
@@ -32,7 +32,7 @@
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
-		activeExecutable = 7652ADD7108CCA340098CAC6 /* EtherTeX */;
+		activeExecutable = 76F8C2981090DE1700AE54CA /* EtherTeX */;
 		activeTarget = 8D1107260486CEB800E47090 /* EtherTeX */;
 		addToTargets = (
 			8D1107260486CEB800E47090 /* EtherTeX */,
@@ -41,7 +41,7 @@
 		);
 		codeSenseManager = 7652ADED108CCA4D0098CAC6 /* Code sense */;
 		executables = (
-			7652ADD7108CCA340098CAC6 /* EtherTeX */,
+			76F8C2981090DE1700AE54CA /* EtherTeX */,
 		);
 		perUserDictionary = {
 			"PBXConfiguration.PBXBreakpointsDataSource.v1:1CA1AED706398EBD00589147" = {
@@ -90,23 +90,25 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 277927794;
-			PBXWorkspaceStateSaveDate = 277927794;
+			PBXPerProjectTemplateStateSaveDate = 277928742;
+			PBXWorkspaceStateSaveDate = 277928742;
 		};
 		perUserProjectItems = {
-			7601064E1090C93300FDCB27 /* PBXTextBookmark */ = 7601064E1090C93300FDCB27 /* PBXTextBookmark */;
-			7621119B1090B54F00D49798 /* PlistBookmark */ = 7621119B1090B54F00D49798 /* PlistBookmark */;
-			762111DD1090BDD400D49798 /* PBXTextBookmark */ = 762111DD1090BDD400D49798 /* PBXTextBookmark */;
 			762111DE1090BDD400D49798 /* PBXTextBookmark */ = 762111DE1090BDD400D49798 /* PBXTextBookmark */;
-			762111DF1090BDD400D49798 /* PBXTextBookmark */ = 762111DF1090BDD400D49798 /* PBXTextBookmark */;
 			766F1A49108E60E900DA78E6 /* PBXBookmark */ = 766F1A49108E60E900DA78E6 /* PBXBookmark */;
 			76A149E6108DCB8D00B47971 /* PBXTextBookmark */ = 76A149E6108DCB8D00B47971 /* PBXTextBookmark */;
 			76AA5B0B108DA1CE0086B01D /* PBXTextBookmark */ = 76AA5B0B108DA1CE0086B01D /* PBXTextBookmark */;
 			76D83DA8108F0A1F00F26C7C /* PBXBookmark */ = 76D83DA8108F0A1F00F26C7C /* PBXBookmark */;
-			76D83DB0108F0EA300F26C7C /* PBXTextBookmark */ = 76D83DB0108F0EA300F26C7C /* PBXTextBookmark */;
-			76D83EAF108F477B00F26C7C /* PBXBookmark */ = 76D83EAF108F477B00F26C7C /* PBXBookmark */;
-			76EAE6521090D8DD00476256 /* PBXTextBookmark */ = 76EAE6521090D8DD00476256 /* PBXTextBookmark */;
-			76F0B84F1090D76A00BA78B3 /* PBXTextBookmark */ = 76F0B84F1090D76A00BA78B3 /* PBXTextBookmark */;
+			76F8C26D1090DB6800AE54CA /* PBXTextBookmark */ = 76F8C26D1090DB6800AE54CA /* PBXTextBookmark */;
+			76F8C29B1090DE2200AE54CA /* PBXBookmark */ = 76F8C29B1090DE2200AE54CA /* PBXBookmark */;
+			76F8C29D1090DE2200AE54CA /* PBXBookmark */ = 76F8C29D1090DE2200AE54CA /* PBXBookmark */;
+			76F8C29F1090DE2200AE54CA /* PBXTextBookmark */ = 76F8C29F1090DE2200AE54CA /* PBXTextBookmark */;
+			76F8C2A01090DE2200AE54CA /* PlistBookmark */ = 76F8C2A01090DE2200AE54CA /* PlistBookmark */;
+			76F8C2A11090DE2200AE54CA /* PBXBookmark */ = 76F8C2A11090DE2200AE54CA /* PBXBookmark */;
+			76F8C2A21090DE2200AE54CA /* PBXTextBookmark */ = 76F8C2A21090DE2200AE54CA /* PBXTextBookmark */;
+			76F8C2A31090DE2200AE54CA /* PBXTextBookmark */ = 76F8C2A31090DE2200AE54CA /* PBXTextBookmark */;
+			76F8C2AE1090DE2200AE54CA /* PBXTextBookmark */ = 76F8C2AE1090DE2200AE54CA /* PBXTextBookmark */;
+			76FBFAFF1090D96600CB6A60 /* PBXTextBookmark */ = 76FBFAFF1090D96600CB6A60 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 7652ADEC108CCA4D0098CAC6 /* Source Control */;
 		userBuildSettings = {
@@ -119,33 +121,12 @@
 			sepNavVisRange = "{0, 243}";
 		};
 	};
-	7601064E1090C93300FDCB27 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 256AC3D80F4B6AC300CF3369 /* EtherTeXAppDelegate.h */;
-		name = "EtherTeXAppDelegate.h: 15";
-		rLen = 8;
-		rLoc = 312;
-		rType = 0;
-		vrLen = 1157;
-		vrLoc = 0;
-	};
 	762111901090B17800D49798 /* English */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {888, 465}}";
-			sepNavSelRange = "{638, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {888, 660}}";
+			sepNavSelRange = "{563, 0}";
 			sepNavVisRange = "{0, 638}";
 		};
-	};
-	7621119B1090B54F00D49798 /* PlistBookmark */ = {
-		isa = PlistBookmark;
-		fRef = 8D1107310486CEB800E47090 /* EtherTeX-Info.plist */;
-		fallbackIsa = PBXBookmark;
-		isK = 0;
-		kPath = (
-		);
-		name = "/Users/djui/Projekte/EtherTeX/EtherTeX-Info.plist";
-		rLen = 0;
-		rLoc = 9223372036854775808;
 	};
 	762111AC1090B6A400D49798 /* German */ = {
 		uiCtxt = {
@@ -153,16 +134,6 @@
 			sepNavSelRange = "{682, 0}";
 			sepNavVisRange = "{0, 682}";
 		};
-	};
-	762111DD1090BDD400D49798 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 089C165DFE840E0CC02AAC07 /* English */;
-		name = "InfoPlist.strings: 3";
-		rLen = 0;
-		rLoc = 45;
-		rType = 0;
-		vrLen = 45;
-		vrLoc = 0;
 	};
 	762111DE1090BDD400D49798 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -173,48 +144,6 @@
 		rType = 0;
 		vrLen = 628;
 		vrLoc = 0;
-	};
-	762111DF1090BDD400D49798 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 762111901090B17800D49798 /* English */;
-		name = "EtherTeXAppDelegate.strings: 7";
-		rLen = 0;
-		rLoc = 563;
-		rType = 0;
-		vrLen = 593;
-		vrLoc = 0;
-	};
-	7652ADD7108CCA340098CAC6 /* EtherTeX */ = {
-		isa = PBXExecutable;
-		activeArgIndices = (
-		);
-		argumentStrings = (
-		);
-		autoAttachOnCrash = 1;
-		breakpointsEnabled = 0;
-		configStateDict = {
-		};
-		customDataFormattersEnabled = 1;
-		dataTipCustomDataFormattersEnabled = 1;
-		dataTipShowTypeColumn = 1;
-		dataTipSortType = 0;
-		debuggerPlugin = GDBDebugging;
-		disassemblyDisplayState = 0;
-		dylibVariantSuffix = "";
-		enableDebugStr = 1;
-		environmentEntries = (
-		);
-		executableSystemSymbolLevel = 0;
-		executableUserSymbolLevel = 0;
-		libgmallocEnabled = 0;
-		name = EtherTeX;
-		savedGlobals = {
-		};
-		showTypeColumn = 0;
-		sourceDirectories = (
-		);
-		variableFormatDictionary = {
-		};
 	};
 	7652ADEC108CCA4D0098CAC6 /* Source Control */ = {
 		isa = PBXSourceControlManager;
@@ -260,53 +189,141 @@
 	};
 	76D83D8D108F066000F26C7C /* Ideas.txt */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {959, 546}}";
-			sepNavSelRange = "{1233, 0}";
-			sepNavVisRange = "{355, 878}";
+			sepNavIntBoundsRect = "{{0, 0}, {888, 660}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 87}";
 		};
 	};
 	76D83DA8108F0A1F00F26C7C /* PBXBookmark */ = {
 		isa = PBXBookmark;
 		fRef = 76AA5B5F108DB5810086B01D /* app.icns */;
 	};
-	76D83DB0108F0EA300F26C7C /* PBXTextBookmark */ = {
+	76F8C26D1090DB6800AE54CA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 76D83D8D108F066000F26C7C /* Ideas.txt */;
-		name = "Ideas.txt: 38";
+		fRef = 762111901090B17800D49798 /* English */;
+		name = "Localizable.strings: 7";
 		rLen = 0;
-		rLoc = 1233;
+		rLoc = 563;
 		rType = 0;
-		vrLen = 878;
-		vrLoc = 355;
+		vrLen = 638;
+		vrLoc = 0;
 	};
-	76D83EAF108F477B00F26C7C /* PBXBookmark */ = {
+	76F8C2981090DE1700AE54CA /* EtherTeX */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = EtherTeX;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	76F8C29B1090DE2200AE54CA /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 76F8C29C1090DE2200AE54CA /* Test.pdf */;
+	};
+	76F8C29C1090DE2200AE54CA /* Test.pdf */ = {
+		isa = PBXFileReference;
+		name = Test.pdf;
+		path = /Users/djui/Projekte/EtherTeX/build/Debug/EtherTeX.app/Contents/Resources/Test.pdf;
+		sourceTree = "<absolute>";
+	};
+	76F8C29D1090DE2200AE54CA /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 76F8C29E1090DE2200AE54CA /* backgrad.gif */;
+	};
+	76F8C29E1090DE2200AE54CA /* backgrad.gif */ = {
+		isa = PBXFileReference;
+		name = backgrad.gif;
+		path = /Users/djui/Projekte/EtherTeX/build/Debug/EtherTeX.app/Contents/Resources/backgrad.gif;
+		sourceTree = "<absolute>";
+	};
+	76F8C29F1090DE2200AE54CA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C165DFE840E0CC02AAC07 /* English */;
+		name = "InfoPlist.strings: 3";
+		rLen = 0;
+		rLoc = 45;
+		rType = 0;
+		vrLen = 45;
+		vrLoc = 0;
+	};
+	76F8C2A01090DE2200AE54CA /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* EtherTeX-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/djui/Projekte/EtherTeX/EtherTeX-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775807;
+	};
+	76F8C2A11090DE2200AE54CA /* PBXBookmark */ = {
 		isa = PBXBookmark;
 		fRef = 766F19A5108E2BF600DA78E6 /* AlertCautionIcon.icns */;
 	};
-	76EAE6521090D8DD00476256 /* PBXTextBookmark */ = {
+	76F8C2A21090DE2200AE54CA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 76D83D8D108F066000F26C7C /* Ideas.txt */;
+		name = "Ideas.txt: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 87;
+		vrLoc = 0;
+	};
+	76F8C2A31090DE2200AE54CA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */;
-		name = "EtherTeXAppDelegate.m: 166";
+		name = "EtherTeXAppDelegate.m: 178";
 		rLen = 0;
-		rLoc = 5847;
+		rLoc = 6055;
 		rType = 0;
 		vrLen = 1500;
 		vrLoc = 5478;
 	};
-	76F0B84F1090D76A00BA78B3 /* PBXTextBookmark */ = {
+	76F8C2AE1090DE2200AE54CA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */;
-		name = "EtherTeXAppDelegate.m: 79";
+		name = "EtherTeXAppDelegate.m: 178";
 		rLen = 0;
-		rLoc = 2114;
+		rLoc = 6055;
 		rType = 0;
-		vrLen = 486;
-		vrLoc = 1879;
+		vrLen = 1500;
+		vrLoc = 5478;
+	};
+	76FBFAFF1090D96600CB6A60 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D80F4B6AC300CF3369 /* EtherTeXAppDelegate.h */;
+		name = "EtherTeXAppDelegate.h: 15";
+		rLen = 8;
+		rLoc = 312;
+		rType = 0;
+		vrLen = 1157;
+		vrLoc = 0;
 	};
 	8D1107260486CEB800E47090 /* EtherTeX */ = {
 		activeExec = 0;
 		executables = (
-			7652ADD7108CCA340098CAC6 /* EtherTeX */,
+			76F8C2981090DE1700AE54CA /* EtherTeX */,
 		);
 	};
 }

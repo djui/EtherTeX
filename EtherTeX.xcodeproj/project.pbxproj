@@ -41,8 +41,8 @@
 		76D83D8D108F066000F26C7C /* Ideas.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Ideas.txt; sourceTree = "<group>"; };
 		76EE5024108CCAB0004FF030 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
 		76F0B8261090D3A000BA78B3 /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		76F8C2971090DE1700AE54CA /* EtherTeX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EtherTeX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1107310486CEB800E47090 /* EtherTeX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "EtherTeX-Info.plist"; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* EtherTeX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EtherTeX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +91,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* EtherTeX.app */,
+				76F8C2971090DE1700AE54CA /* EtherTeX.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,7 +159,7 @@
 			name = EtherTeX;
 			productInstallPath = "$(HOME)/Applications";
 			productName = EtherTeX;
-			productReference = 8D1107320486CEB800E47090 /* EtherTeX.app */;
+			productReference = 76F8C2971090DE1700AE54CA /* EtherTeX.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -286,6 +286,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -299,6 +300,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
