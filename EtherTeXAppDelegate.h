@@ -14,6 +14,8 @@
 
 @interface EtherTeXAppDelegate : NSObject <NSApplicationDelegate> {
 	NSWindow *mainWindow;
+	NSWindow *preferenceWindow;
+
 	IBOutlet WebView *webView;
 	IBOutlet PDFView *pdfView;
 	IBOutlet NSProgressIndicator *parserIndicator;
@@ -27,6 +29,7 @@ int PDFLATEX_STATUS_SUCCESS = 0;
 int PDFLATEX_STATUS_FAILURE = 1;
 
 @property (assign) IBOutlet NSWindow *mainWindow;
+@property (assign) IBOutlet NSWindow *preferenceWindow;
 @property (assign) IBOutlet WebView *webView;
 @property (assign) IBOutlet PDFView *pdfView;
 @property (assign) IBOutlet NSProgressIndicator *parserIndicator;

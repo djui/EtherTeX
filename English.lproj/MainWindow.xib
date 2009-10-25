@@ -2707,9 +2707,9 @@
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{90, 2}, {999, 661}}</string>
+					<string>{{62, 25}, {999, 661}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{90, 2}, {999, 661}}</string>
+					<string>{{62, 25}, {999, 661}}</string>
 					<integer value="1"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<boolean value="NO"/>

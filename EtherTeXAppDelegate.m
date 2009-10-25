@@ -7,10 +7,13 @@
 //
 
 #import "EtherTeXAppDelegate.h"
+#import "PreferencesDelegate.h"
 
 @implementation EtherTeXAppDelegate
 
 @synthesize mainWindow;
+@synthesize preferenceWindow;
+
 @synthesize webView;
 @synthesize pdfView;
 @synthesize parserIndicator;
@@ -34,6 +37,8 @@
 																@"", @"pdflatex_path",
 																@"NO", @"ignore_no_pdflatex",
 																nil]];
+		
+		preferenceWindow = [[PreferenceWindow alloc] init];
 	}
 
 	return self;
@@ -57,6 +62,8 @@
 	[NSTimer scheduledTimerWithTimeInterval:[defaults integerForKey:@"download_interval"] 
 																target:self selector:@selector(tick:) 
 																userInfo:nil repeats:NO];
+	
+	[NSBundle loadNibNamed:@"Preferences" owner:preferenceWindow];
 }
 
 - (void)awakeFromNib {
@@ -65,7 +72,7 @@
 	[webView setResourceLoadDelegate:self];
 	//[webView setWantsLayer:YES];
 	
-	// TODO Hide everything until we have at least or web site completely finished loaded
+	// Hide everything until we have at least or web site completely finished loaded
 	[webView setHidden:YES];
 	[pdfView setHidden:YES];
 	
@@ -115,7 +122,7 @@
 }
 
 - (void)noConnectivityAlertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void*)contextInfo {
-	// TODO Quit the application
+	// Quit the application because no connectivity means there is no use of etherpad
 	[mainWindow close];
 }
 
@@ -185,7 +192,7 @@
  */	
 
 - (void)tick:(NSTimer *)theTimer {
-	// TODO Download the text file content
+	// Download the text file content
 	[self startDownloadingURL];
 }
 
@@ -230,7 +237,7 @@
 - (BOOL)checkParserResult:(int)resultStatus outputText:(NSString *)outputText {
 	NSLog(@"texParserTask status: %d", resultStatus);
 	
-	// TODO Check if no errors
+	// Check if no errors
 	if (resultStatus == PDFLATEX_STATUS_SUCCESS) {
 		
 		NSLog(@"texParserTask succeeded.");
@@ -245,7 +252,7 @@
 		}
 	}
 		
-	// TODO Check if file exists
+	// Check if file exists
 	NSString *pdfFile = [[[self tempfilePath] stringByDeletingPathExtension] stringByAppendingPathExtension:@"pdf"];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:pdfFile]) {
 		NSLog(@"Can't find PDF file. TexParserTask failed after all?");		
@@ -261,7 +268,7 @@
 	NSString *workingDirectory = [[self tempfilePath] stringByDeletingLastPathComponent];
 	NSString *texFile = [[self tempfilePath] lastPathComponent];
 	
-	// TODO Run "pdflatex" : @"pdflatex -version" -> "pdfTeX 3.1415926-1.40.9-2.2 (Web2C 7.5.7)..."
+	// Run "pdflatex" : @"pdflatex -version" -> "pdfTeX 3.1415926-1.40.9-2.2 (Web2C 7.5.7)..."
 	NSTask *texParserTask = [[NSTask alloc] init];
 	NSArray *arguments = [NSArray arrayWithObjects:@"-interaction=nonstopmode", texFile, nil];
 	NSPipe *pipe = [NSPipe pipe];

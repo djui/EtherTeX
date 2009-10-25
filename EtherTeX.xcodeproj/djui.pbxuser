@@ -9,17 +9,17 @@
 	};
 	256AC3D80F4B6AC300CF3369 /* EtherTeXAppDelegate.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {888, 645}}";
-			sepNavSelRange = "{312, 8}";
-			sepNavVisRange = "{0, 1157}";
+			sepNavIntBoundsRect = "{{0, 0}, {888, 672}}";
+			sepNavSelRange = "{705, 56}";
+			sepNavVisRange = "{0, 1243}";
 			sepNavWindowFrame = "{{67, 0}, {733, 778}}";
 		};
 	};
 	256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1356, 5810}}";
-			sepNavSelRange = "{6055, 0}";
-			sepNavVisRange = "{5478, 1500}";
+			sepNavIntBoundsRect = "{{0, 0}, {1370, 5908}}";
+			sepNavSelRange = "{1599, 0}";
+			sepNavVisRange = "{1381, 308}";
 			sepNavWindowFrame = "{{67, 0}, {733, 778}}";
 		};
 	};
@@ -90,25 +90,25 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 277928742;
-			PBXWorkspaceStateSaveDate = 277928742;
+			PBXPerProjectTemplateStateSaveDate = 278179493;
+			PBXWorkspaceStateSaveDate = 278179493;
 		};
 		perUserProjectItems = {
 			762111DE1090BDD400D49798 /* PBXTextBookmark */ = 762111DE1090BDD400D49798 /* PBXTextBookmark */;
+			764C9EC01094B718005171FE /* PBXTextBookmark */ = 764C9EC01094B718005171FE /* PBXTextBookmark */;
+			764C9EC11094B718005171FE /* PBXTextBookmark */ = 764C9EC11094B718005171FE /* PBXTextBookmark */;
+			764C9EC21094B718005171FE /* PBXTextBookmark */ = 764C9EC21094B718005171FE /* PBXTextBookmark */;
+			764C9EC31094B718005171FE /* PBXTextBookmark */ = 764C9EC31094B718005171FE /* PBXTextBookmark */;
+			764C9EC61094B72B005171FE /* PBXTextBookmark */ = 764C9EC61094B72B005171FE /* PBXTextBookmark */;
 			766F1A49108E60E900DA78E6 /* PBXBookmark */ = 766F1A49108E60E900DA78E6 /* PBXBookmark */;
 			76A149E6108DCB8D00B47971 /* PBXTextBookmark */ = 76A149E6108DCB8D00B47971 /* PBXTextBookmark */;
 			76AA5B0B108DA1CE0086B01D /* PBXTextBookmark */ = 76AA5B0B108DA1CE0086B01D /* PBXTextBookmark */;
 			76D83DA8108F0A1F00F26C7C /* PBXBookmark */ = 76D83DA8108F0A1F00F26C7C /* PBXBookmark */;
 			76F8C26D1090DB6800AE54CA /* PBXTextBookmark */ = 76F8C26D1090DB6800AE54CA /* PBXTextBookmark */;
-			76F8C29B1090DE2200AE54CA /* PBXBookmark */ = 76F8C29B1090DE2200AE54CA /* PBXBookmark */;
-			76F8C29D1090DE2200AE54CA /* PBXBookmark */ = 76F8C29D1090DE2200AE54CA /* PBXBookmark */;
 			76F8C29F1090DE2200AE54CA /* PBXTextBookmark */ = 76F8C29F1090DE2200AE54CA /* PBXTextBookmark */;
 			76F8C2A01090DE2200AE54CA /* PlistBookmark */ = 76F8C2A01090DE2200AE54CA /* PlistBookmark */;
 			76F8C2A11090DE2200AE54CA /* PBXBookmark */ = 76F8C2A11090DE2200AE54CA /* PBXBookmark */;
 			76F8C2A21090DE2200AE54CA /* PBXTextBookmark */ = 76F8C2A21090DE2200AE54CA /* PBXTextBookmark */;
-			76F8C2A31090DE2200AE54CA /* PBXTextBookmark */ = 76F8C2A31090DE2200AE54CA /* PBXTextBookmark */;
-			76F8C2AE1090DE2200AE54CA /* PBXTextBookmark */ = 76F8C2AE1090DE2200AE54CA /* PBXTextBookmark */;
-			76FBFAFF1090D96600CB6A60 /* PBXTextBookmark */ = 76FBFAFF1090D96600CB6A60 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 7652ADEC108CCA4D0098CAC6 /* Source Control */;
 		userBuildSettings = {
@@ -144,6 +144,70 @@
 		rType = 0;
 		vrLen = 628;
 		vrLoc = 0;
+	};
+	764C9EA11094B512005171FE /* PreferencesDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {888, 660}}";
+			sepNavSelRange = "{170, 0}";
+			sepNavVisRange = "{0, 298}";
+		};
+	};
+	764C9EA21094B512005171FE /* PreferencesDelegate.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {888, 660}}";
+			sepNavSelRange = "{191, 0}";
+			sepNavVisRange = "{0, 196}";
+		};
+	};
+	764C9EC01094B718005171FE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 764C9EA21094B512005171FE /* PreferencesDelegate.m */;
+		name = "PreferencesDelegate.m: 12";
+		rLen = 0;
+		rLoc = 191;
+		rType = 0;
+		vrLen = 196;
+		vrLoc = 0;
+	};
+	764C9EC11094B718005171FE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 764C9EA11094B512005171FE /* PreferencesDelegate.h */;
+		name = "PreferencesDelegate.h: 10";
+		rLen = 0;
+		rLoc = 170;
+		rType = 0;
+		vrLen = 298;
+		vrLoc = 0;
+	};
+	764C9EC21094B718005171FE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D80F4B6AC300CF3369 /* EtherTeXAppDelegate.h */;
+		name = "EtherTeXAppDelegate.h: 32";
+		rLen = 56;
+		rLoc = 705;
+		rType = 0;
+		vrLen = 1243;
+		vrLoc = 0;
+	};
+	764C9EC31094B718005171FE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */;
+		name = "EtherTeXAppDelegate.m: 64";
+		rLen = 0;
+		rLoc = 1660;
+		rType = 0;
+		vrLen = 1116;
+		vrLoc = 0;
+	};
+	764C9EC61094B72B005171FE /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */;
+		name = "EtherTeXAppDelegate.m: 41";
+		rLen = 0;
+		rLoc = 973;
+		rType = 0;
+		vrLen = 1124;
+		vrLoc = 3;
 	};
 	7652ADEC108CCA4D0098CAC6 /* Source Control */ = {
 		isa = PBXSourceControlManager;
@@ -224,6 +288,7 @@
 		dataTipSortType = 0;
 		debuggerPlugin = GDBDebugging;
 		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
 		enableDebugStr = 1;
 		environmentEntries = (
 		);
@@ -231,29 +296,11 @@
 		executableUserSymbolLevel = 0;
 		libgmallocEnabled = 0;
 		name = EtherTeX;
+		savedGlobals = {
+		};
 		showTypeColumn = 0;
 		sourceDirectories = (
 		);
-	};
-	76F8C29B1090DE2200AE54CA /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 76F8C29C1090DE2200AE54CA /* Test.pdf */;
-	};
-	76F8C29C1090DE2200AE54CA /* Test.pdf */ = {
-		isa = PBXFileReference;
-		name = Test.pdf;
-		path = /Users/djui/Projekte/EtherTeX/build/Debug/EtherTeX.app/Contents/Resources/Test.pdf;
-		sourceTree = "<absolute>";
-	};
-	76F8C29D1090DE2200AE54CA /* PBXBookmark */ = {
-		isa = PBXBookmark;
-		fRef = 76F8C29E1090DE2200AE54CA /* backgrad.gif */;
-	};
-	76F8C29E1090DE2200AE54CA /* backgrad.gif */ = {
-		isa = PBXFileReference;
-		name = backgrad.gif;
-		path = /Users/djui/Projekte/EtherTeX/build/Debug/EtherTeX.app/Contents/Resources/backgrad.gif;
-		sourceTree = "<absolute>";
 	};
 	76F8C29F1090DE2200AE54CA /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -274,7 +321,7 @@
 		);
 		name = "/Users/djui/Projekte/EtherTeX/EtherTeX-Info.plist";
 		rLen = 0;
-		rLoc = 9223372036854775807;
+		rLoc = 9223372036854775808;
 	};
 	76F8C2A11090DE2200AE54CA /* PBXBookmark */ = {
 		isa = PBXBookmark;
@@ -288,36 +335,6 @@
 		rLoc = 0;
 		rType = 0;
 		vrLen = 87;
-		vrLoc = 0;
-	};
-	76F8C2A31090DE2200AE54CA /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */;
-		name = "EtherTeXAppDelegate.m: 178";
-		rLen = 0;
-		rLoc = 6055;
-		rType = 0;
-		vrLen = 1500;
-		vrLoc = 5478;
-	};
-	76F8C2AE1090DE2200AE54CA /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 256AC3D90F4B6AC300CF3369 /* EtherTeXAppDelegate.m */;
-		name = "EtherTeXAppDelegate.m: 178";
-		rLen = 0;
-		rLoc = 6055;
-		rType = 0;
-		vrLen = 1500;
-		vrLoc = 5478;
-	};
-	76FBFAFF1090D96600CB6A60 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 256AC3D80F4B6AC300CF3369 /* EtherTeXAppDelegate.h */;
-		name = "EtherTeXAppDelegate.h: 15";
-		rLen = 8;
-		rLoc = 312;
-		rType = 0;
-		vrLen = 1157;
 		vrLoc = 0;
 	};
 	8D1107260486CEB800E47090 /* EtherTeX */ = {
